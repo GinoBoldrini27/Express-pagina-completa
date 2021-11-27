@@ -4,7 +4,9 @@ const db = require('../models');
 //FUNCION SELECT *FROM libro, hace que la funcion se exporte y se guarde para ello utilizamos una funcion anónima (=>)
 const getBooks = async () => {
     //llamo a la base de datos
-    const books = await db.libro.findAll().then(result => {
+    const books = await db.libro.findAll({
+        include: db.autor
+    }).then(result => {
         return result;
     });
     return books;
