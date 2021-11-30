@@ -1,3 +1,6 @@
+//Primero coexionar los externos sin ..// y despues los internos
+const { Op } = require("sequelize");
+
 //traer la base de datos
 const db = require('../models');
 
@@ -29,8 +32,29 @@ const getBooks = async () => {
  }
 
 
+
+
+ const searchByTitle= async (titulo)=>{
+     //Op substring toma una cadena y le agrega %
+     console.log(titulo);
+    const results= await db.libro. findAll({
+        where: {
+            titulo:{
+        [Op.substring]: titulo
+     }   
+    },
+    include: db.autor  
+    }).then (result => {
+        return result;
+    });
+
+    return results;
+ }
+
+
 //Exportamos las funciones
 module.exports={
     getBooks,
-    getBookById
+    getBookById,
+    searchByTitle
 }

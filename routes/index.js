@@ -13,6 +13,23 @@ router.get('/nosotros', (req, res) => {
   res.render('pages/nosotros', { title: 'Nosotros' });
 });
 
+
+
+//GET /resultados page
+router.get('/resultados', async (req,res)=> {
+  //Conseguir lo que el usuario tpeoen el campo titulo en terminal
+  console.log(req.query);
+  const { titulo } = req.query;
+
+  //Enviar titulo a la llamada de la API
+  const results= await api.searchByTitle(titulo);
+
+  res.send(results);
+});
+
+
+
+
 /* GET contacto page */
 router.get('/contacto', (req, res) => {
   res.render('pages/contacto', { title: 'Contacto' });
