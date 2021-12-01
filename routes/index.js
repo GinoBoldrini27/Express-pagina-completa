@@ -13,7 +13,11 @@ router.get('/nosotros', (req, res) => {
   res.render('pages/nosotros', { title: 'Nosotros' });
 });
 
+//GET agregar page
+router.get('/agregar', (req,res)=>{
+  res.render('pages/agregar');
 
+});
 
 //GET /resultados page
 router.get('/resultados', async (req,res)=> {

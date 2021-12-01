@@ -31,7 +31,13 @@ const getBooks = async () => {
      return book;
  }
 
+ //Conseguir autores en la base de datos:
+ const getAuthors= async () =>{
+    const authors={
 
+    };
+    return authors;
+ }
 
 
  const searchByTitle= async (titulo)=>{
@@ -47,7 +53,6 @@ const getBooks = async () => {
     }).then (result => {
         return result;
     });
-k
     return results;
  }
 
@@ -56,5 +61,7 @@ k
 module.exports={
     getBooks,
     getBookById,
-    searchByTitle
+    searchByTitle,
+    getAuthors
+   
 }
