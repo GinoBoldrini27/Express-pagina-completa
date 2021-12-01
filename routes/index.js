@@ -19,6 +19,13 @@ router.get('/agregar', (req,res)=>{
 
 });
 
+//AGREGAR AUTORES COMPLETOS
+router.get('/agregar', async (req,res)=>{
+  const authors=await api.getAuthors;
+  console.log(authors);
+  res.render('pages/agregar');
+})
+
 //GET /resultados page
 router.get('/resultados', async (req,res)=> {
   //Conseguir lo que el usuario tpeoen el campo titulo en terminal
