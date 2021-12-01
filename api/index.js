@@ -33,9 +33,10 @@ const getBooks = async () => {
 
  //Conseguir autores en la base de datos:
  const getAuthors= async () =>{
-    const authors={
+    const authors= await db.autor.findAll().then(result => {
+        return result
+    });
 
-    };
     return authors;
  }
 
