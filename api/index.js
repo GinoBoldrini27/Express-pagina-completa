@@ -1,68 +1,84 @@
-//Primero coexionar los externos sin ..// y despues los internos
 const { Op } = require("sequelize");
 
-//traer la base de datos
+// traer la DB
 const db = require('../models');
 
-//FUNCION SELECT *FROM libro, hace que la funcion se exporte y se guarde para ello utilizamos una funcion anónima (=>)
+// SELECT * FROM libro
+// Esto es una función anónima de tipo arrow function guardada en una variable llamada getBooks... por lo tanto: es una función llamada getBooks
 const getBooks = async () => {
-    //llamo a la base de datos
+    // Llamo a la DB
     const books = await db.libro.findAll({
         include: db.autor
     }).then(result => {
         return result;
     });
+
     return books;
 }
 
-//Conseguir libros a traves de sus ID, Select*FROM tabla Where id libdro. Se puede filtrar mediante parametro por medio del I => {
- const getBookById= async (id) => {
-     console.log('-*-*-*-*-*-*-*');
-     console.log(' El ID que llego a /api es + id');
-     console.log('-*-*-*-*-*-*-*');
-     
-     //SELECT*FROM libro Where id_libro=4
-     const book= await db.libro.findByPk(id, { 
-         include: db.autor
-     }).then (result => {
-         return result;
-     });
-
-     return book;
- }
-
- //Conseguir autores en la base de datos:
- const getAuthors= async () =>{
-    const authors= await db.autor.findAll().then(result => {
-        return result
+const getAuthors = async () => {
+    // SELECT * FROM autor
+    const authors = await db.autor.findAll().then(result => {
+        return result;
     });
 
     return authors;
- }
+}
 
-
- const searchByTitle= async (titulo)=>{
-     //Op substring toma una cadena y le agrega %
-     console.log(titulo);
-    const results= await db.libro. findAll({
-        where: {
-            titulo:{
-        [Op.substring]: titulo
-     }   
-    },
-    include: db.autor  
-    }).then (result => {
+const getBookById = async (id) => {
+    console.log('-*-*-*-*-*-*-*-*-*-*');
+    console.log('El ID que llegó a /api es ' + id);
+    console.log('-*-*-*-*-*-*-*-*-*-*');
+    // SELECT * FROM libro WHERE id_libro = 3
+    // findByPk = find by primary key
+    const book = await db.libro.findByPk(id, {
+        include: db.autor
+    }).then(result => {
         return result;
     });
+
+    return book;
+}
+
+const searchByTitle = async (titulo) => {
+    // Op.substring toma una cadena y le agrega %
+    // SELECT * FROM libros
+    // WHERE columna OPERADOR valor
+    const results = await db.libro.findAll({
+        where: {
+            titulo: {
+                [Op.substring]: titulo
+            }
+        },
+        include: db.autor
+    }).then(result => {
+        return result;
+    });
+
     return results;
- }
+}
 
+const addBook = async (titulo, precio, portada, autorId) => {
+    // Acá vamos a agregar un libro
+    console.log('Llegó: ', titulo, precio, portada, autorId);
 
-//Exportamos las funciones
-module.exports={
+    // Tengo que armar el INSERT INTO libro ...
+    const newBook = await db.libro.create({
+        titulo,
+        precio,
+        portada,
+        autorIdAutor: autorId
+    });
+
+    return newBook;
+}
+
+// Exportamos las funciones
+module.exports = {
     getBooks,
+    getAuthors,
     getBookById,
     searchByTitle,
-    getAuthors
-   
+    addBook
 }
+

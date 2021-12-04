@@ -1,0 +1,8 @@
+Conseguir todos los autores en la base de datos (API)
+Guardarlos en un array y que una función los devuelva (API)
+Llamar a la función que me consigue los autores (RUTAS)
+Pruebo en un console.log recibir los autores (RUTAS)
+    Envío los autores al EJS (RUTAS)
+    Recorrer autores en el EJS (EJS)
+    Creamos el select (EJS)
+    Creamos un elemento option por cada autor usando el ID y el nombreCompleto de esos autores (EJS)

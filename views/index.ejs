@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include('./partials/nav.ejs') %>
 
-<head>
-  <title>
-    <%= title %>
-  </title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
 
-<body>
-  <%- include('./partials/nav.ejs') %>
-    <h1>
-      <%= title %>
-    </h1>
-    <p>Welcome to <%= title %>
-    </p>
-
-    <form action="/resultados" method="get">
+    <form action="/resultados" method="GET">
       <label>
-        Buscar por titulo
-        <input type="search" name="titulo">
+        Buscar por título:
         <!-- Con el atributo name identificamos a cada input en el backend -->
+        <input type="search" name="titulo">
       </label>
       <input type="submit" value="Buscar">
     </form>
-</body>
 
+  </body>
 </html>
